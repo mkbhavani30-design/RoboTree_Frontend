@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robotree - Air Purifier Dashboard</title>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css?v=1.3">
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+    <header class="app-header">
+        <div class="brand-container">
+            <i class="fa-solid fa-leaf brand-icon"></i>
+            <h1 class="brand-title">Robotree <span class="badge-live">Live Monitor</span></h1>
+        </div>
+        <div class="header-meta">
+            <!-- Theme Toggle Button -->
+            <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle Light/Dark Mode" aria-label="Toggle Theme">
+                <i class="fa-solid fa-moon" id="theme-icon"></i>
+            </button>
+            <span id="connection-badge" class="badge-connection">
+                <span id="connection-dot" class="dot-status"></span>
+                <span id="connection-text">Awaiting Connection...</span>
+            </span>
+            <div id="current-time" class="time-display">--:--:--</div>
+        </div>
+    </header>
+
+    <div class="app-body">
+        <!-- Main Dashboard Workspace -->
+        <main class="dashboard-main">
+            
+            <!-- Power & Environment Telemetry Header Cards -->
+            <div class="telemetry-grid">
+                <div class="card-telemetry">
+                    <div>
+                        <p class="card-label">Power Source</p>
+                        <p id="power-source-text" class="card-value value-amber"><i class="fa-solid fa-solar-panel"></i> --</p>
+                    </div>
+                    <div class="icon-wrapper icon-amber">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                </div>
+
+                <div class="card-telemetry">
+                    <div>
+                        <p class="card-label">Battery Charge</p>
+                        <p id="battery-level-text" class="card-value value-emerald">--%</p>
+                    </div>
+                    <div class="icon-wrapper icon-emerald">
+                        <i class="fa-solid fa-battery-half"></i>
+                    </div>
+                </div>
+
+                <div class="card-telemetry">
+                    <div>
+                        <p class="card-label">Temperature</p>
+                        <p id="temp-text" class="card-value value-slate">-- °C</p>
+                    </div>
+                    <div class="icon-wrapper icon-blue">
+                        <i class="fa-solid fa-temperature-half"></i>
+                    </div>
+                </div>
+
+                <div class="card-telemetry">
+                    <div>
+                        <p class="card-label">Humidity</p>
+                        <p id="humidity-text" class="card-value value-slate">-- %</p>
+                    </div>
+                    <div class="icon-wrapper icon-cyan">
+                        <i class="fa-solid fa-droplet"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scalable Dynamic Filters Section -->
+            <div class="filters-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fa-solid fa-filter"></i> Filter Telemetry Units
+                    </h2>
+                    <span class="section-subtitle">Dynamic Multi-Filter Ready</span>
+                </div>
+
+                <!-- Container where filter slots are generated dynamically -->
+                <div id="filters-container" class="filters-grid"></div>
+            </div>
+
+            <!-- Interactive Analytics & Dynamic AI Predictions Workstation -->
+            <div class="analytics-grid">
+                <!-- Interactive Tabbed Chart -->
+                <div class="card-chart">
+                    <div class="chart-header">
+                        <h3 class="card-title">
+                            <i class="fa-solid fa-chart-line"></i> Live Telemetry History
+                        </h3>
+                        
+                        <!-- Pollutant Selector Tabs -->
+                        <div id="pollutant-tabs" class="tab-group">
+                            <button data-pollutant="pm25" class="tab-btn active">PM2.5</button>
+                            <button data-pollutant="pm10" class="tab-btn">PM10</button>
+                            <button data-pollutant="co2" class="tab-btn">eCO₂</button>
+                            <button data-pollutant="tvoc" class="tab-btn">TVOC</button>
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <canvas id="liveChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Synchronized AI Inferences Panel -->
+                <div class="card-predictions">
+                    <div>
+                        <div class="predictions-header">
+                            <h3 class="card-title">
+                                <i class="fa-solid fa-wand-magic-sparkles icon-purple"></i> AI Predictions
+                            </h3>
+                            <span id="active-pollutant-badge" class="badge-pollutant">PM2.5</span>
+                        </div>
+                        <p class="card-subtitle">Estimated future pollutant concentration levels.</p>
+                        
+                        <div class="predictions-list">
+                            <div class="prediction-item">
+                                <span>+1 Hour Horizon</span>
+                                <span id="pred-1h" class="pred-value value-emerald">-- <span class="unit-text">µg/m³</span></span>
+                            </div>
+                            <div class="prediction-item">
+                                <span>+3 Hours Horizon</span>
+                                <span id="pred-3h" class="pred-value value-amber">-- <span class="unit-text">µg/m³</span></span>
+                            </div>
+                            <div class="prediction-item">
+                                <span>+6 Hours Horizon</span>
+                                <span id="pred-6h" class="pred-value value-rose">-- <span class="unit-text">µg/m³</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="predictions-footer">
+                        *AI Model Inferences for <span id="prediction-footer-label">PM2.5</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Floating AI Voice Button -->
+    <button id="ai-toggle-btn" class="ai-toggle-btn glow">
+        <i class="fa-solid fa-microphone"></i>
+    </button>
+
+    <!-- Floating AI Assistant Drawer -->
+    <div id="ai-drawer" class="ai-drawer hidden">
+        <div class="drawer-header">
+            <div class="drawer-title">
+                <i class="fa-solid fa-robot"></i>
+                <span>Robotree Assistant</span>
+            </div>
+            <button id="ai-close-btn" class="drawer-close-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div id="chat-window" class="chat-window">
+            <div class="msg msg-assistant">
+                Assistant interface initialized. Voice and query engine ready.
+            </div>
+        </div>
+
+        <div class="chat-controls">
+            <input type="text" id="chat-input" placeholder="Type prompt or use mic..." class="chat-input">
+            <button id="voice-btn" class="chat-btn-voice">
+                <i class="fa-solid fa-microphone"></i>
+            </button>
+            <button id="send-btn" class="chat-btn-send">
+                Send
+            </button>
+        </div>
+    </div>
+
+    <!-- Static Script -->
+    <script src="script.js"></script>
+</body>
+</html>
