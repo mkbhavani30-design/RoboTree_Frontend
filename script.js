@@ -6,7 +6,7 @@ const POLLUTANT_CONFIG = {
     tvoc: { label: 'TVOC', unit: 'mg/m³', color: '#a855f7', fill: 'rgba(168, 85, 247, 0.1)' }
 };
 
-// Global State
+
 window.appState = {
     activePollutant: 'pm25',
     theme: 'dark',
@@ -42,7 +42,7 @@ window.appState = {
 
 let chartInstance = null;
 
-// Theme Toggle Logic
+
 function setupThemeToggle() {
     const themeBtn = document.getElementById('theme-toggle-btn');
     const themeIcon = document.getElementById('theme-icon');
@@ -87,7 +87,7 @@ function updateChartThemeColors(theme) {
     chartInstance.update();
 }
 
-// Render Dynamic Filter Slots
+
 function renderFilters() {
     const container = document.getElementById('filters-container');
     if (!container) return;
@@ -136,7 +136,7 @@ function renderFilters() {
     });
 }
 
-// Chart Initialization
+
 function initChart() {
     const ctx = document.getElementById('liveChart').getContext('2d');
     const conf = POLLUTANT_CONFIG[window.appState.activePollutant];
@@ -171,7 +171,7 @@ function initChart() {
     });
 }
 
-// Update Active AI Predictions View
+
 function updatePredictionView() {
     const key = window.appState.activePollutant;
     const conf = POLLUTANT_CONFIG[key];
@@ -185,7 +185,7 @@ function updatePredictionView() {
     document.getElementById('pred-6h').innerHTML = `${preds.h6} <span class="unit-text">${conf.unit}</span>`;
 }
 
-// Tab Switching Handler
+
 function setupTabSwitching() {
     const tabContainer = document.getElementById('pollutant-tabs');
     tabContainer.addEventListener('click', (e) => {
@@ -211,7 +211,7 @@ function setupTabSwitching() {
     });
 }
 
-// Global Hooks
+
 window.addFilterSlot = function(filterObj) {
     window.appState.filters.push(filterObj);
     renderFilters();
@@ -270,7 +270,7 @@ window.updateDashboard = function(payload) {
     }
 };
 
-// UI Drawer Logic
+
 const aiToggleBtn = document.getElementById('ai-toggle-btn');
 const aiCloseBtn = document.getElementById('ai-close-btn');
 const aiDrawer = document.getElementById('ai-drawer');
