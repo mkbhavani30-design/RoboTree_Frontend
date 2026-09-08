@@ -4,23 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Robotree - Air Purifier Dashboard</title>
-    <!-- Chart.js CDN -->
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css?v=1.3">
+    
 </head>
 <body>
 
-    <!-- Top Navigation Bar -->
     <header class="app-header">
         <div class="brand-container">
             <i class="fa-solid fa-leaf brand-icon"></i>
             <h1 class="brand-title">Robotree <span class="badge-live">Live Monitor</span></h1>
         </div>
         <div class="header-meta">
-            <!-- Theme Toggle Button -->
+           
             <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle Light/Dark Mode" aria-label="Toggle Theme">
                 <i class="fa-solid fa-moon" id="theme-icon"></i>
             </button>
@@ -33,10 +31,10 @@
     </header>
 
     <div class="app-body">
-        <!-- Main Dashboard Workspace -->
+        
         <main class="dashboard-main">
             
-            <!-- Power & Environment Telemetry Header Cards -->
+            
             <div class="telemetry-grid">
                 <div class="card-telemetry">
                     <div>
@@ -79,7 +77,7 @@
                 </div>
             </div>
 
-            <!-- Scalable Dynamic Filters Section -->
+            
             <div class="filters-section">
                 <div class="section-header">
                     <h2 class="section-title">
@@ -88,20 +86,20 @@
                     <span class="section-subtitle">Dynamic Multi-Filter Ready</span>
                 </div>
 
-                <!-- Container where filter slots are generated dynamically -->
+               
                 <div id="filters-container" class="filters-grid"></div>
             </div>
 
-            <!-- Interactive Analytics & Dynamic AI Predictions Workstation -->
+            
             <div class="analytics-grid">
-                <!-- Interactive Tabbed Chart -->
+                
                 <div class="card-chart">
                     <div class="chart-header">
                         <h3 class="card-title">
                             <i class="fa-solid fa-chart-line"></i> Live Telemetry History
                         </h3>
                         
-                        <!-- Pollutant Selector Tabs -->
+                        
                         <div id="pollutant-tabs" class="tab-group">
                             <button data-pollutant="pm25" class="tab-btn active">PM2.5</button>
                             <button data-pollutant="pm10" class="tab-btn">PM10</button>
@@ -115,7 +113,7 @@
                     </div>
                 </div>
 
-                <!-- Synchronized AI Inferences Panel -->
+               
                 <div class="card-predictions">
                     <div>
                         <div class="predictions-header">
@@ -149,12 +147,12 @@
         </main>
     </div>
 
-    <!-- Floating AI Voice Button -->
+   
     <button id="ai-toggle-btn" class="ai-toggle-btn glow">
         <i class="fa-solid fa-microphone"></i>
     </button>
 
-    <!-- Floating AI Assistant Drawer -->
+   
     <div id="ai-drawer" class="ai-drawer hidden">
         <div class="drawer-header">
             <div class="drawer-title">
@@ -183,7 +181,7 @@
         </div>
     </div>
 
-    <!-- Static Script -->
+   
     <script src="script.js"></script>
 </body>
 </html>
